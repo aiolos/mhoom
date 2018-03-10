@@ -8,6 +8,11 @@ header('Content-type: audio/mpeg');
 header ("Pragma: no-cache");
 
 $resource = fopen($filePath, 'rb');
+// First send a 20 seconds buffer
+echo fread($resource, $bitrate * 20);
+ob_flush();
+flush();
+
 while(!feof($resource)){
     echo fread($resource, $bitrate);
     ob_flush();
